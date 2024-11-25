@@ -1,0 +1,6 @@
+flask
+sqlalchemy
+bleach
+werkzeug
+flask-sqlalchemy
+flask-limiter

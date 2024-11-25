@@ -1,0 +1,22 @@
+<h1>Welcome, {{ username }}</h1>
+<p>Balance: ${{ "%.2f"|format(balance) }}</p>
+<form method="post" action="{{ url_for('manage') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="action" value="deposit">
+    <input type="number" name="amount" step="0.01" required>
+    <button type="submit">Deposit</button>
+</form>
+<form method="post" action="{{ url_for('manage') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="action" value="withdraw">
+    <input type="number" name="amount" step="0.01" required>
+    <button type="submit">Withdraw</button>
+</form>
+{% if transactions %}
+<h2>Recent Transactions</h2>
+<ul>
+    {% for transaction in transactions %}
+    <li>{{ transaction.type }}: ${{ "%.2f"|format(transaction.amount) }} ({{ transaction.timestamp }})</li>
+    {% endfor %}
+</ul>
+{% endif %}
